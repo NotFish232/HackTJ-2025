@@ -4,11 +4,12 @@ import datetime
 
 
 class User(AbstractBaseUser):
-    USERNAME_FIELD = "email"
-
+    objects = UserManager()
+    USERNAME_FIELD = "username"
+    username = models.CharField(max_length=512, unique=True)
+    email = models.EmailField(unique=True, null=True, blank=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    email = models.EmailField(unique=True)
 
 
 class Protein(models.Model):

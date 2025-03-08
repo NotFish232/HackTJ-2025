@@ -3,16 +3,16 @@
 }
 
 #signhead {
-    color: rgb(168, 122, 7);
+    color: var(--blue);
     text-align: left;
 }
 
 #login-button {
-    background-color: rgb(168, 122, 7);
+    background-color: var(--blue);
     color: white;
     border-radius: 10%;
 }
 
 hr {
-    border: 2px solid rgb(116, 84, 2);
+    border: 2px solid var(--blue);
 }
