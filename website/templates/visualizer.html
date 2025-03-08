@@ -41,6 +41,8 @@
             .component({ selector: 'polymer' })
             .representation({ type: 'cartoon' })
             .color({ color: 'green' });
+
+        // make the color depend on pLDDT Confidence
         {% comment %} structure
             .component({ selector: 'ligand' })
             .label({ text: 'Retinoic acid' })
@@ -65,6 +67,34 @@
             left: 0,
             width: '100vw',
             height: '92vh',
+        });
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        
+        $(async function() {
+            let sleep_time = 5;
+            await sleep(100);
+            $("button.msp-btn.msp-btn-icon.msp-btn-link-toggle-off[title='Toggle Controls Panel']").click()
+            await sleep(sleep_time);
+            $("button.msp-btn.msp-btn-icon.msp-form-control[title='Actions']").click()
+            await sleep(sleep_time);
+            $("button.msp-btn.msp-form-control.msp-btn-block").click()
+            await sleep(sleep_time);
+            $("button.msp-btn.msp-btn-block[title='Uniform']").click()
+            await sleep(sleep_time);
+            $("button.msp-btn.msp-btn-block.msp-no-overflow[title='Click to expand. Validation']").click()
+            await sleep(sleep_time);
+            $("button.msp-btn.msp-btn-block.msp-no-overflow.msp-action-menu-button").filter(
+                function() {
+                    return $(this).text() === 'pLDDT Confidence';
+                }
+            ).click();
+            await sleep(sleep_time);
+            $("button.msp-btn.msp-btn-icon.msp-btn-link-toggle-on[title='Toggle Controls Panel']").click()
+            await sleep(20);
+            $("#viewer").show();
         });
 
     </script>
