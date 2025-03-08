@@ -14,7 +14,7 @@ class User(AbstractBaseUser):
 
 class Protein(models.Model):
     entry_id = models.CharField(max_length=512, unique=True)
-    uniprot_id = models.CharField(max_length=512)
+    uniprot_id = models.CharField(max_length=512, unique=True)
     
     uniprot_description = models.CharField(max_length=512)
     uniprot_sequence = models.TextField()
