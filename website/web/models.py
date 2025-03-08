@@ -12,11 +12,11 @@ class User(AbstractBaseUser):
 
 
 class Protein(models.Model):
-    entry_id = models.CharField(unique=True)
-
-    uniprot_id = models.CharField()
-    uniprot_sequence = models.CharField()
-    uniprot_description = models.CharField()
+    entry_id = models.CharField(max_length=512, unique=True)
+    uniprot_id = models.CharField(max_length=512)
+    
+    uniprot_description = models.CharField(max_length=512)
+    uniprot_sequence = models.TextField()
 
 class ProteinResult(models.Model):
     protein = models.ForeignKey(Protein, on_delete=models.CASCADE)
