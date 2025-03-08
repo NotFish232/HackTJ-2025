@@ -4,6 +4,6 @@ sqlparse==0.5.3
 django-tailwind==3.8.0
 django-stubs==5.1.3
 biopython==1.85
-types-requests==2.32.0
+types-requests==2.32.0.20250306
 molviewspec==1.2.1
 -e file:./quantum_protein_folding/
