@@ -9,6 +9,10 @@ import datetime
 
 from quantumfold.apps.web.models import User
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 def home(request):
     return render(request, 'home.html')
 
@@ -18,22 +22,25 @@ def login_view(request):
         return redirect(reverse("index"))
 
     if request.method == "POST":
-        email = request.POST.get("email")
+        username = request.POST.get("username")
         password = request.POST.get("password")
 
+        logger.warning(username)
+
+
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.get(username=username)
         except User.DoesNotExist:
             return render(
                 request,
                 "login.html",
                 {
-                    "error": "The credentials you entered were incorrect. Please try again.",
-                    "email": email,
+                    "error": "The user does not exist.",
+                    "username": username,
                 },
             )
 
-        user = authenticate(username=user.email, password=password)
+        user = authenticate(username=user.username, password=password)
         if user is not None:
             auth_login(request, user)
 
@@ -51,7 +58,7 @@ def login_view(request):
             "login.html",
             {
                 "error": "The credentials you entered were incorrect. Please try again.",
-                "email": email,
+                "username": username,
             },
         )
 
