@@ -1,111 +1,123 @@
-{% load static %}
-{% load static tailwind_tags %}
+{% load static %} {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>{% block title %}{% endblock %} | QuantumFold</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0"
+    />
 
-<head>
-  <title>{% block title %}{% endblock %} | QuantumFold</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link href="{% static 'img/favicon.png' %}" rel="icon" />
+    <script
+      src="https://kit.fontawesome.com/4ca1ff7e0a.js"
+      crossorigin="anonymous"
+    ></script>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <link href="{% static 'img/favicon.png' %}" rel="icon">
-  <script src="https://kit.fontawesome.com/4ca1ff7e0a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'base.css' %}" />
+    {% block head %} {% endblock %} 
+    {% tailwind_css %} 
+    {% block css %} {% endblock %}
+  </head>
 
-  <link rel="stylesheet" href="{% static 'base.css' %}">
-  {% block head %}
-  {% endblock %}
-  {% tailwind_css %}
-  {% block css %}
-  {% endblock %}
-</head>
-
-
-<body>
-  {% block nav %}
-  <nav class="navbar navbar-expand-sm navbar-dark">
-      <a class="navbar-brand" href="/">
-        <img src="{% static 'img/logo.png' %}" height="100" class="d-inline-block align-top navbar-logo"
-          alt="QuantumFold">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
-          </li>
-          {% comment %} <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'alerts' %}">Alerts</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'map' %}">Map</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'video' %}">Live Cameras</a>
-          </li>
-          {% endcomment %}
-          {% if request.user.is_authenticated and request.user.is_staff %}
-          {% comment %}
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'dashboard' %}">Dashboard</a>
-          </li> {% endcomment %}
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'admin:index' %}">Admin</a>
-          </li>
-          {% endif %}
-        </ul>
-        <ul class="navbar-nav" style="position: absolute; right: 10px;">
-           {% comment %} <li class="nav-item report-link">
-            <a class="nav-link" aria-current="page" href="{% url 'report-missing' %}">
-              <i class="fas fa-exclamation-triangle"></i>&nbsp;
-              Report Missing Person
-            </a>
-          </li>
-          <li class="nav-item report-link">
-            <a class="nav-link" aria-current="page" href="{% url 'report-information' %}">
-              <i class="fas fa-info-circle"></i>&nbsp;
-              Report Information
-            </a>
-          </li> {% endcomment %}
-          {% comment %} {% if request.user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'profile' %}">
-              <i class="fa-solid fa-user"></i>&nbsp;
-              {{ request.user.person.full_name }}
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'logout' %}">Logout</a>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'login' %}">Login</a>
-          </li>
-          {% endif %} {% endcomment %}
-        </ul>
+  <body>
+    {% block nav %}
+    <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+      <div
+        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+      >
+        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <img
+            src="{% static 'logo.png' %}"
+            class="h-8"
+            alt="QuantumFold Logo"
+          />
+          <span
+            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+            >QuantumFold</span
+          >
+        </a>
+        <button
+          data-collapse-toggle="navbar-multi-level"
+          type="button"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          aria-controls="navbar-multi-level"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="w-5 h-5"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 17 14"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M1 1h15M1 7h15M1 13h15"
+            />
+          </svg>
+        </button>
+        <div class="hidden w-full md:block md:w-auto" id="navbar-multi-level">
+          <ul
+            class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+          >
+            <li>
+              <a
+                href="{% url 'home' %}"
+                class="block py-2 px-3 bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
+                aria-current="page"
+                >Home</a
+              >
+            </li>
+            {% if request.user.is_authenticated %}
+              {% if request.user.is_staff %}
+              <li>
+                <a class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                href="{% url 'admin:index' %}">Admin</a>
+              </li>
+              {% endif %}
+            <li>
+              <i class="fa-solid fa-user"></i>&nbsp; {{ request.user.person.full_name }}
+            </li>
+            <li>
+              <a class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+              href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li>
+              <a class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+              href="{% url 'login' %}">Login</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
-  </nav>
-  {% endblock %}
+    </nav>
+    {% endblock %}
 
-  <div class="container content" id="content">
-  {% block body %}
-  {% endblock %}
-  </div>
-  {% block footer %}
-  {% endblock %}
+    <div class="container content" id="content">
+      {% block body %} {% endblock %}
+    </div>
+    {% block footer %} {% endblock %}
 
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'base.js' %}"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"></script>
-  <script src="{% static 'base.js' %}"></script>
-
-  {% block js %}
-  {% endblock %}
-</body>
-
-
+    {% block js %} {% endblock %}
+  </body>
 </html>
