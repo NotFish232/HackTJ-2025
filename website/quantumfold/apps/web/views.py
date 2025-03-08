@@ -11,6 +11,8 @@ from quantumfold.apps.web.models import User
 
 import logging
 
+import molviewspec as mvs
+
 logger = logging.getLogger(__name__)
 
 def home(request):
@@ -19,6 +21,10 @@ def home(request):
 
 def visualizer(request):
     return render(request, 'visualizer.html')
+
+
+def protein_search(request):
+    return render(request, 'protein_search.html')
 
 
 def login_view(request):
