@@ -1,0 +1,3 @@
+[submodule "quantum_protein_folding"]
+	path = quantum_protein_folding
+	url = git@github.com:NotFish232/quantum-protein-folding.git

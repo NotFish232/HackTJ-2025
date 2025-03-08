@@ -1,0 +1,27 @@
+nav.navbar {
+    background-color: #2A2E30 !important;
+    height: 50px;
+}
+
+img.navbar-logo {
+    position: relative;
+    top: 25px;  
+}
+
+h1 {
+    text-align: center;
+}
+
+#content {
+    margin-top: 10px;
+}
+
+#body {
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.center {
+    text-align: center;
+}
