@@ -1,3 +1,7 @@
 :root {
     --blue: rgb(0, 120, 195);
 }
+
+nav {
+    height: 8vh;
+}

@@ -7,12 +7,63 @@
 
 {% block css %}
     <link href="{% static 'visualizer.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/molstar@4.12.1/build/viewer/molstar.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
 
+<div id="viewer" style="position: relative; width: 500px; height: 500px;"></div>
+
 {% endblock %}
 
 {% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/molstar@4.12.1/build/viewer/molstar.min.js"></script>
+    <script>
+        // Build an ad-hoc MVS view
+        // Try and get URL from ?url=
+        let url = new URLSearchParams(window.location.search).get('url');
+        let format = new URLSearchParams(window.location.search).get('format');
+        console.log(url)
+        if (!url)
+            url = 'https://www.ebi.ac.uk/pdbe/entry-files/1cbs.bcif';
+            format = 'bcif';
+        if (!format)
+            format = 'pdb'; 
+        const builder = molstar.PluginExtensions.mvs.MVSData.createBuilder();
+        const structure = builder
+            .download({ url: url })
+            .parse({ format: format })
+            .modelStructure({});
+        /*structure
+            .component({ selector: 'polymer' })
+            .representation({ type: 'cartoon' })
+            .color({ color: 'green' });
+        structure
+            .component({ selector: 'ligand' })
+            .label({ text: 'Retinoic acid' })
+            .focus({})
+            .representation({ type: 'ball_and_stick' })
+            .color({ color: '#cc3399' });
+        const mvsData = builder.getState();*/
+
+        // Initialize viewer and load MVSJ
+        const mvsj = molstar.PluginExtensions.mvs.MVSData.toMVSJ(mvsData);
+        molstar.Viewer.create('viewer', { layoutIsExpanded: false, layoutShowControls: true })
+            .then(viewer => viewer.loadMvsData(mvsj, 'mvsj'));
+
+        // // Alternative initialization and loading (avoids encoding and again decoding the data, allows changing the view by using `replaceExisting: true`):
+        // molstar.Viewer.create('viewer2', { layoutIsExpanded: false, layoutShowControls: false })
+        //     .then(viewer => molstar.PluginExtensions.mvs.loadMVS(viewer.plugin, mvsData, { sourceUrl: undefined, sanityChecks: true, replaceExisting: false }));
+    
+        
+        let viewer = $('#viewer');
+        viewer.css({
+            position: 'absolute',
+            left: 0,
+            width: '100vw',
+            height: '92vh',
+        });
+
+    </script>
     <script src="{% static 'visualizer.js' %}"></script>
 {% endblock %}

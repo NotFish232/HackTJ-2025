@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 from quantumfold.apps.web import views
 
@@ -25,4 +27,4 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("visualizer", views.visualizer, name="visualizer"),
     path("protein_search", views.protein_search, name="protein_search"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
