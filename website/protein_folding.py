@@ -1,13 +1,14 @@
 import requests
 from urllib.parse import quote
 import json
+
 import os
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "quantumfold.settings")
 import django
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "website.settings")
 django.setup()
-
-from website.web.models import Protein
+from quantumfold import Protein
 
 ALPHAFOLD_API_PRED_URL = "https://alphafold.ebi.ac.uk/api/prediction"
 
@@ -31,12 +32,9 @@ def alphafold_fetch(protein_name: str) -> tuple[str, str, str] | None:
     )
     if human_protein_json is None:
         return None
-    
+
     entry_id = human_protein_json[ENTRY_ID_KEY]
-    
 
     return Protein.objects.create()
 
     print(json.dumps(human_protein_json, indent=4))
-
-alphafold_fetch("Angiotensin 1-10")

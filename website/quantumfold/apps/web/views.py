@@ -7,7 +7,7 @@ from django.urls import reverse
 import random
 import datetime
 
-from web.models import User
+from quantumfold.apps.web.models import User
 
 def home(request):
     return render(request, 'home.html')
