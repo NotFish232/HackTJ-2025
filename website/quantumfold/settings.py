@@ -137,7 +137,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-TAILWIND_APP_NAME = 'theme'
+TAILWIND_APP_NAME = 'quantumfold.apps.theme'
 
 INTERNAL_IPS = [
     "127.0.0.1",
