@@ -17,9 +17,13 @@ def home(request):
     return render(request, 'home.html')
 
 
+def visualizer(request):
+    return render(request, 'visualizer.html')
+
+
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect(reverse("index"))
+        return redirect(reverse("home"))
 
     if request.method == "POST":
         username = request.POST.get("username")
@@ -51,7 +55,7 @@ def login_view(request):
                 except:
                     pass
 
-            return redirect(reverse("index"))
+            return redirect(reverse("home"))
 
         return render(
             request,
