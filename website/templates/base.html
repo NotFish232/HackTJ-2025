@@ -15,7 +15,7 @@
   {% block css %} {% endblock %}
 </head>
 
-<body class="w-screen h-screen font-roboto">
+<body class="w-screen h-screen font-roboto bg-theme-light"">
   {% block nav %}
   <nav class="bg-slate-100 h-[10%]">
     <div class="h-full flex flex-row items-center">
@@ -64,7 +64,7 @@
   </nav>
   {% endblock %}
 
-  <div class="w-full h-[90%] bg-theme-light" id="content">
+  <div class="w-full h-[90%]" id="content">
     {% block body %} {% endblock %}
   </div>
   {% block footer %} {% endblock %}
