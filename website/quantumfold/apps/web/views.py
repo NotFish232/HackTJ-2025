@@ -33,7 +33,7 @@ def protein_folding(request, uniprot_accession):
 
 
 def visualize_folding(request, uniprot_accession):
-    run_alphafold(request.GET.get("uniprot_accession"))
+    run_alphafold(uniprot_accession)
     alphafold_result = f"/media/{uniprot_accession}/alphafold.pdb"
     return redirect(reverse("visualizer") + f"?url={alphafold_result}")
 

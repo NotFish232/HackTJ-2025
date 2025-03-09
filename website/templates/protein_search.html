@@ -41,13 +41,13 @@ Protein Search
                     {{ protein.uniprot_accession }}
                 </td>
                 <td>
-                    <a href="{% url 'visualize_folding' protein.uniprot_accession %}">
-                        Visualize
+                    <a href="{% url 'visualize_folding' protein.uniprot_accession %}" target="_blank">
+                        AlphaFold
                     </a>
                 </td>
                 <td>
-                    <a href="{% url 'protein_folding' protein.uniprot_accession %}">
-                        Model Folding
+                    <a href="{% url 'protein_folding' protein.uniprot_accession %}" target="_blank">
+                        QuantumFold
                     </a>
                 </td>
             </tr>
