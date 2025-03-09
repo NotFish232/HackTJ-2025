@@ -23,6 +23,8 @@
         <tr>
             <th>Protein</th>
             <th>Uniprot ID</th>
+            <th>Model Folding</th>
+            <th>Personalized Medicine Compare</th>
         </tr>
     </thead>
     <tbody>
@@ -30,8 +32,11 @@
         <tr>
             <td>{{ protein.name }}</td>
             <td>
+                {{ protein.uniprot_accession }}
+            </td>
+            <td>
                 <a href="{% url 'protein_folding' protein.uniprot_accession %}">
-                    {{ protein.uniprot_accession }}
+                    Model Folding
                 </a>
             </td>
         </tr>

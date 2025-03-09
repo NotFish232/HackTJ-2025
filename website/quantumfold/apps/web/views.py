@@ -31,6 +31,10 @@ def protein_folding(request, uniprot_accession):
     return redirect(reverse("visualizer") + f"?url={alphafold_result}")
 
 
+def personalized_compare(request):
+    return render(request, 'personalized_compare.html')
+
+
 def protein_search(request):
     if request.GET.get("search"):
         search_term = request.GET.get("search")
