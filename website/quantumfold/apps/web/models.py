@@ -20,8 +20,14 @@ class Protein(models.Model):
     uniprot_description = models.CharField(max_length=512)
     uniprot_sequence = models.TextField()
 
+    def __str__(self):
+        return self.uniprot_accession
+
 class ProteinResult(models.Model):
     protein = models.ForeignKey(Protein, on_delete=models.CASCADE)
 
     alphafold_result = models.FileField()
     quantum_result = models.FileField()
+
+    def __str__(self):
+        return self.protein.uniprot_accession

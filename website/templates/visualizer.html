@@ -13,8 +13,6 @@
 {% block body %}
 
 <div id="viewer" class="viewer"></div>
-<div id="viewer1" class="viewer"></div>
-<div id="viewer2" class="viewer"></div>
 
 
 {% endblock %}
@@ -37,8 +35,8 @@
             format = 'pdb';
         }
 
+        const builder = molstar.PluginExtensions.mvs.MVSData.createBuilder();
         if (url) {
-            const builder = molstar.PluginExtensions.mvs.MVSData.createBuilder();
             const structure = builder
                 .download({ url: url })
                 .parse({ format: format })
@@ -47,74 +45,63 @@
                 .component({ selector: 'polymer' })
                 .representation({ type: 'cartoon' })
                 .color({ color: 'green' });
-
-            const mvsData = builder.getState();
-            const mvsj = molstar.PluginExtensions.mvs.MVSData.toMVSJ(mvsData);
-            molstar.Viewer.create('viewer', { layoutIsExpanded: false, layoutShowControls: false })
-                .then(viewer => viewer.loadMvsData(mvsj, 'mvsj'));
-    
         }
+
         else {
-            const builder1 = molstar.PluginExtensions.mvs.MVSData.createBuilder();
+            $('.viewer').show();
             const structure1 = builder
                 .download({ url: url1 })
                 .parse({ format: format })
                 .modelStructure({});
-            structure
+            structure1
                 .component({ selector: 'polymer' })
                 .representation({ type: 'cartoon' })
                 .color({ color: 'green' });
-
-            const mvsData1 = builder.getState();
-            const mvsj1 = molstar.PluginExtensions.mvs.MVSData.toMVSJ(mvsData);
-            molstar.Viewer.create('viewer1', { layoutIsExpanded: false, layoutShowControls: false })
-                .then(viewer => viewer.loadMvsData(mvsj1, 'mvsj'));
             
-
-            const builder2 = molstar.PluginExtensions.mvs.MVSData.createBuilder();
             const structure2 = builder
                 .download({ url: url2 })
                 .parse({ format: format })
                 .modelStructure({});
-            structure
+            structure2
                 .component({ selector: 'polymer' })
                 .representation({ type: 'cartoon' })
-                .color({ color: 'green' });
-
-            const mvsData2 = builder.getState();
-            const mvsj2 = molstar.PluginExtensions.mvs.MVSData.toMVSJ(mvsData);
-            molstar.Viewer.create('viewer2', { layoutIsExpanded: false, layoutShowControls: false })
-                .then(viewer => viewer.loadMvsData(mvsj2, 'mvsj'));
-            
+                .color({ color: 'red' });
         }
-        
+
+        const mvsData = builder.getState();
+        const mvsj = molstar.PluginExtensions.mvs.MVSData.toMVSJ(mvsData);
+        molstar.Viewer.create('viewer', { layoutIsExpanded: false, layoutShowControls: false })
+            .then(viewer => viewer.loadMvsData(mvsj, 'mvsj'));
+
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
 
-        $(async function() {
-            let sleep_time = 5;
-            await sleep(500);
-            $("button.msp-btn.msp-btn-icon.msp-btn-link-toggle-off[title='Toggle Controls Panel']").click()
-            await sleep(sleep_time);
-            $("button.msp-btn.msp-btn-icon.msp-form-control[title='Actions']").click()
-            await sleep(sleep_time);
-            $("button.msp-btn.msp-form-control.msp-btn-block").click()
-            await sleep(sleep_time);
-            $("button.msp-btn.msp-btn-block[title='Uniform']").click()
-            await sleep(sleep_time);
-            $("button.msp-btn.msp-btn-block.msp-no-overflow[title='Click to expand. Validation']").click()
-            await sleep(sleep_time);
-            $("button.msp-btn.msp-btn-block.msp-no-overflow.msp-action-menu-button").filter(
-                function() {
-                    return $(this).text() === 'pLDDT Confidence';
-                }
-            ).click();
-            await sleep(sleep_time);
-            $("button.msp-btn.msp-btn-icon.msp-btn-link-toggle-on[title='Toggle Controls Panel']").click()
-            await sleep(20);
-            $(".viewer").show();
-        });
+        if(url) {
+            $(async function() {
+                let sleep_time = 5;
+                await sleep(500);
+                $("button.msp-btn.msp-btn-icon.msp-btn-link-toggle-off[title='Toggle Controls Panel']").click()
+                await sleep(sleep_time);
+                $("button.msp-btn.msp-btn-icon.msp-form-control[title='Actions']").click()
+                await sleep(sleep_time);
+                $("button.msp-btn.msp-form-control.msp-btn-block").click()
+                await sleep(sleep_time);
+                $("button.msp-btn.msp-btn-block[title='Uniform']").click()
+                await sleep(sleep_time);
+                $("button.msp-btn.msp-btn-block.msp-no-overflow[title='Click to expand. Validation']").click()
+                await sleep(sleep_time);
+                $("button.msp-btn.msp-btn-block.msp-no-overflow.msp-action-menu-button").filter(
+                    function() {
+                        return $(this).text() === 'pLDDT Confidence';
+                    }
+                ).click();
+                await sleep(sleep_time);
+                $("button.msp-btn.msp-btn-icon.msp-btn-link-toggle-on[title='Toggle Controls Panel']").click()
+                await sleep(20);
+                $(".viewer").show();
+            });
+        }
 
     </script>
     <script src="{% static 'visualizer.js' %}"></script>

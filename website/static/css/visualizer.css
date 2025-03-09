@@ -1,7 +1,16 @@
-div#viewer {
+.viewer {
     position: absolute; 
     left: 0;
     width: 100vw; 
     height: 90vh;
     display: none;
+}
+
+div#viewer1 {
+    width: 50vw; 
+}
+
+div#viewer2 {
+    right: 0;
+    width: 50vw; 
 }

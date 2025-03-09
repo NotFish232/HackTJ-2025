@@ -29,6 +29,9 @@ def run_alphafold(uniprot_accession: str) -> ProteinResult | None:
     p = ProteinResult(protein=protein)
     p.alphafold_result.name = str(protein_dir / "alphafold.pdb")
 
+    protein.save()
+    p.save()
+
     return p, protein
 
 
@@ -43,5 +46,7 @@ def run_full_protein_folding(uniprot_accession: str) -> ProteinResult | None:
         f.write(quantum_folding_result)
 
     p.quantum_result.name = str(protein_dir / "quantumfold.pdb")
+
+    p.save()
 
     return p

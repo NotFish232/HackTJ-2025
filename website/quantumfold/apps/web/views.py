@@ -7,7 +7,7 @@ from django.urls import reverse
 import random
 import datetime
 
-from quantumfold.apps.web.models import User
+from quantumfold.apps.web.models import User, Protein, ProteinResult
 
 from quantumfold.apps.backend.search import search_proteins
 from quantumfold.apps.backend.protein_folding import run_full_protein_folding, run_alphafold
@@ -26,14 +26,26 @@ def visualizer(request):
 
 
 def protein_folding(request, uniprot_accession):
-    run_full_protein_folding(uniprot_accession)
+    try:
+        protein = Protein.objects.get(uniprot_accession=uniprot_accession)
+        protein_result = ProteinResult.objects.get(protein=protein)
+        if not protein_result.quantum_result or not protein_result.alphafold_result:
+            run_full_protein_folding(uniprot_accession)
+    except:
+        run_full_protein_folding(uniprot_accession)
     alphafold_result = f"/media/{uniprot_accession}/alphafold.pdb"
     quantumfold_result = f"/media/{uniprot_accession}/quantumfold.pdb"
     return redirect(reverse("visualizer") + f"?url1={alphafold_result}&url2={quantumfold_result}")
 
 
 def visualize_folding(request, uniprot_accession):
-    run_alphafold(uniprot_accession)
+    try:
+        protein = Protein.objects.get(uniprot_accession=uniprot_accession)
+        protein_result = ProteinResult.objects.get(protein=protein)
+        if not protein_result.alphafold_result:
+            run_alphafold(uniprot_accession)
+    except:
+        run_alphafold(uniprot_accession)
     alphafold_result = f"/media/{uniprot_accession}/alphafold.pdb"
     return redirect(reverse("visualizer") + f"?url={alphafold_result}")
 
