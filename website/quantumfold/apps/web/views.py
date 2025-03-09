@@ -6,11 +6,14 @@ from django.conf import settings
 from django.urls import reverse
 import random
 import datetime
+from django.http import HttpResponse
+import json
 
 from quantumfold.apps.web.models import User, Protein, ProteinResult
 
 from quantumfold.apps.backend.search import search_proteins
 from quantumfold.apps.backend.protein_folding import run_full_protein_folding, run_alphafold
+from quantumfold.apps.backend.alphamissense import get_alphamissense_result
 
 import logging
 
@@ -61,6 +64,15 @@ def personalized_compare(request, uniprot_accession):
     return render(request, 'personalized_compare.html', {
         'uniprot_accession': uniprot_accession,
     })
+
+
+def alphamissense(request, uniprot_id, residue_num):
+    result = get_alphamissense_result(uniprot_id, residue_num)
+    return HttpResponse(
+        json.dumps(result),
+        content_type="application/json",
+    )
+
 
 
 def protein_search(request):

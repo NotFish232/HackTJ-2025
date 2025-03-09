@@ -1,13 +1,15 @@
+import requests
 
+ALPHAMISSENSE_API_URL = "https://alphamissense.hegelab.org/hotspotapi"
+def get_alphamissense_result(uniprot_id, residue_num):
+    url = f"{ALPHAMISSENSE_API_URL}?uid={uniprot_id}&resi={residue_num}"
+    response = requests.get(url, timeout=10)
+    if response.status_code != 200:
+        return None
+    r_json = response.json()
+    return {
+        'benign': r_json['benign'],
+        'pathogenic': r_json['pathogenic'],
+        'ambiguous': r_json['ambiguous'],
+    }
 
-def get_alphamissense_result(uniprot_id, mutation_id):
-    with open('alpha_missense.tsv') as f:
-        for line in f:
-            if line.startswith(uniprot_id):
-                print(line)
-                fields = line.strip().split('\t')
-                if mutation_id == fields[1]:
-                    return fields[2], fields[3]
-    return None, None
-
-print(get_alphamissense_result('P43235', '1BY8'))

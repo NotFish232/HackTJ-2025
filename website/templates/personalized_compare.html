@@ -15,14 +15,19 @@
 <iframe src="https://www.rcsb.org/groups/3d-sequence/polymer_entity/{{ uniprot_accession }}" allow-scripts allow-popups allow-same-origin></iframe>
 
 <div id="alphamissense">
-    <input type="text" id="alphamissense-input" placeholder="AlphaFold Missense Variant">
-    <button id="alphamissense-button">Search</button>
-    <span id="alphamissense-results"></span>
+    <input type="text" id="alphamissense-input" placeholder="Missense Amino Acid #">
+    <button id="alphamissense-submit">Search</button>
+    <span id="alphamissense-results">
+        Benign: <span class="text-green-500" id="alphamissense-benign"></span> | 
+        Pathogenic: <span class="text-red-500" id="alphamissense-pathogenic"></span> | 
+        Ambiguous: <span class="text-blue-500" id="alphamissense-ambiguous"></span>
+    </span>
 </div>
 
 {% endblock %}
 
 {% block js %}
     {% comment %} <script src="https://cdn.jsdelivr.net/npm/molstar@4.12.1/build/viewer/molstar.min.js"></script> {% endcomment %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{% static 'personalized_compare.js' %}"></script>
 {% endblock %}
