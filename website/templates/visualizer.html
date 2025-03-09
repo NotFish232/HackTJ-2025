@@ -37,28 +37,64 @@
             format = 'pdb';
         }
 
-        const builder = molstar.PluginExtensions.mvs.MVSData.createBuilder();
-        const structure = builder
-            .download({ url: url })
-            .parse({ format: format })
-            .modelStructure({});
-        structure
-            .component({ selector: 'polymer' })
-            .representation({ type: 'cartoon' })
-            .color({ color: 'green' });
+        if (url) {
+            const builder = molstar.PluginExtensions.mvs.MVSData.createBuilder();
+            const structure = builder
+                .download({ url: url })
+                .parse({ format: format })
+                .modelStructure({});
+            structure
+                .component({ selector: 'polymer' })
+                .representation({ type: 'cartoon' })
+                .color({ color: 'green' });
 
-        const mvsData = builder.getState();
-        const mvsj = molstar.PluginExtensions.mvs.MVSData.toMVSJ(mvsData);
-        molstar.Viewer.create('viewer', { layoutIsExpanded: false, layoutShowControls: false })
-            .then(viewer => viewer.loadMvsData(mvsj, 'mvsj'));
+            const mvsData = builder.getState();
+            const mvsj = molstar.PluginExtensions.mvs.MVSData.toMVSJ(mvsData);
+            molstar.Viewer.create('viewer', { layoutIsExpanded: false, layoutShowControls: false })
+                .then(viewer => viewer.loadMvsData(mvsj, 'mvsj'));
     
+        }
+        else {
+            const builder1 = molstar.PluginExtensions.mvs.MVSData.createBuilder();
+            const structure1 = builder
+                .download({ url: url1 })
+                .parse({ format: format })
+                .modelStructure({});
+            structure
+                .component({ selector: 'polymer' })
+                .representation({ type: 'cartoon' })
+                .color({ color: 'green' });
+
+            const mvsData1 = builder.getState();
+            const mvsj1 = molstar.PluginExtensions.mvs.MVSData.toMVSJ(mvsData);
+            molstar.Viewer.create('viewer1', { layoutIsExpanded: false, layoutShowControls: false })
+                .then(viewer => viewer.loadMvsData(mvsj1, 'mvsj'));
+            
+
+            const builder2 = molstar.PluginExtensions.mvs.MVSData.createBuilder();
+            const structure2 = builder
+                .download({ url: url2 })
+                .parse({ format: format })
+                .modelStructure({});
+            structure
+                .component({ selector: 'polymer' })
+                .representation({ type: 'cartoon' })
+                .color({ color: 'green' });
+
+            const mvsData2 = builder.getState();
+            const mvsj2 = molstar.PluginExtensions.mvs.MVSData.toMVSJ(mvsData);
+            molstar.Viewer.create('viewer2', { layoutIsExpanded: false, layoutShowControls: false })
+                .then(viewer => viewer.loadMvsData(mvsj2, 'mvsj'));
+            
+        }
+        
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
-        
+
         $(async function() {
             let sleep_time = 5;
-            await sleep(300);
+            await sleep(500);
             $("button.msp-btn.msp-btn-icon.msp-btn-link-toggle-off[title='Toggle Controls Panel']").click()
             await sleep(sleep_time);
             $("button.msp-btn.msp-btn-icon.msp-form-control[title='Actions']").click()
@@ -77,7 +113,7 @@
             await sleep(sleep_time);
             $("button.msp-btn.msp-btn-icon.msp-btn-link-toggle-on[title='Toggle Controls Panel']").click()
             await sleep(20);
-            $("#viewer").show();
+            $(".viewer").show();
         });
 
     </script>
