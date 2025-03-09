@@ -5,12 +5,14 @@ $(function() {
         let residueNum = $("#alphamissense-input").val();
         let parts = window.location.href.split("/");
         let uniprotId = parts[parts.length - 1];
-        let results = getAlphaMissenseResult(uniprotId, residueNum);
-        if (results) {
-            $("#alphamissense-benign").text(results.benign);
-            $("#alphamissense-pathogenic").text(results.pathogenic);
-            $("#alphamissense-ambiguous").text(results.ambiguous);
-        }
+        getAlphaMissenseResult(uniprotId, residueNum).then(results => {
+            console.log(results);
+            if (results) {
+                $("#alphamissense-benign").text(results.benign);
+                $("#alphamissense-pathogenic").text(results.pathogenic);
+                $("#alphamissense-ambiguous").text(results.ambiguous);
+            }
+        });
     });
 });
 
