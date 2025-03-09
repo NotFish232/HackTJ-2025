@@ -41,7 +41,10 @@ def alphafold_fetch(
     uniprot_description = response_json.get(UNIPROT_DESCRIPTION_KEY)
     uniprot_sequence = response_json.get(UNIPROT_SEQUENCE_KEY)
 
-    pdb_file_url = response_json[PDBURL_KEY]
+    pdb_file_url = response_json.get(PDBURL_KEY)
+
+    if not pdb_file_url:
+        return None
 
     protein = Protein(
         uniprot_accession=uniprot_accession,
