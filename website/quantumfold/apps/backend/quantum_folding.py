@@ -1,4 +1,3 @@
-import protein_folding
 from protein_folding.penalty_parameters import PenaltyParameters
 from protein_folding.interactions.miyazawa_jernigan_interaction import (
     MiyazawaJerniganInteraction,
