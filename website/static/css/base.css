@@ -2,9 +2,7 @@
     --blue: rgb(0, 120, 195);
 }
 
-nav {
-    height: 8vh;
-}
+
 html, body {
     max-width: 100%;
     overflow-x: hidden;
