@@ -9,9 +9,10 @@ import datetime
 
 from quantumfold.apps.web.models import User
 
+from quantumfold.apps.backend.search import search_proteins
+
 import logging
 
-import molviewspec as mvs
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +25,18 @@ def visualizer(request):
 
 
 def protein_search(request):
+    if request.GET.get("search"):
+        search_term = request.GET.get("search")
+        proteins = search_proteins(search_term)
+
+        return render(
+            request,
+            "protein_search.html",
+            {"proteins": [
+                {'name': protein[0], 'uniprot_id': protein[1]}
+                for protein in proteins
+            ]},
+        )
     return render(request, 'protein_search.html')
 
 

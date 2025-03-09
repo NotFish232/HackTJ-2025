@@ -10,33 +10,32 @@
 {% endblock %}
 
 {% block body %}
-<form class="form-signin" method="post">
-        <div class="form-group">
-            {% csrf_token %}
-            <div id="box">
-                <h1 class="h3 mb-3 font-weight-normal signintext" id="signhead"><b>Sign in</b></h1>
-            </div>
-            <hr>
-            <input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus value="{{ email }}">
-            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
-            <br>
-            <button class="btn btn-lg btn-success btn-block" id="login-button" type="submit">Sign in</button>
-            {% comment %} <button class="btn btn-lg btn-primary btn-block">
-                <a style="color: white; text-decoration: none;" href="{% url 'sign_up' %}">Sign up</a>
-            </button> {% endcomment %}
+<form method="post">
+    {% csrf_token %}
+    <div id="box">
+        <h1 class="h3 mb-3 font-weight-normal signintext" id="signhead"><b>Sign in</b></h1>
+    </div>
+    <hr>
+    <input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus value="{{ email }}">
+    <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+    <br>
+    <button class="btn btn-lg btn-success btn-block" id="login-button" type="submit">Sign in</button>
+    {% comment %} <button class="btn btn-lg btn-primary btn-block">
+        <a style="color: white; text-decoration: none;" href="{% url 'sign_up' %}">Sign up</a>
+    </button> {% endcomment %}
+    </div>
+    {% if error %}
+        <br>
+        <div class="alert alert-danger" role="alert">
+            <i class="fa-sharp fa-solid fa-triangle-exclamation"></i>
+            <span>{{ error }}</span>
         </div>
-        {% if error %}
-            <br>
-            <div class="alert alert-danger" role="alert">
-                <i class="fa-sharp fa-solid fa-triangle-exclamation"></i>
-                <span>{{ error }}</span>
-            </div>
-        {% endif %}
-        {% for message in messages %}
-            <br>
-            <div class="alert alert-info" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
-    </form>
+    {% endif %}
+    {% for message in messages %}
+        <br>
+        <div class="alert alert-info" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+</form>
 {% endblock %}

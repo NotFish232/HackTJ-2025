@@ -9,6 +9,32 @@
 {% endblock %}
 
 {% block body %}
+<br>
+<h1 class="text-4xl">Protein Search</h1>
+<form action="" method="get">
+    <input type="text" name="search" id="search" class="form-control" placeholder="Protein" required autofocus value="{{ protein }}">
+    <br>
+    <input type="submit" class="btn btn-lg btn-success btn-block" id="search-button" value="Search">
+</form>
+<br>
+<h2 class="text-4xl">Results</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Protein</th>
+            <th>Uniprot ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for protein in proteins %}
+        <tr>
+            <td>{{ protein.name }}</td>
+            <td>{{ protein.uniprot_id }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
 
 {% endblock %}
 
