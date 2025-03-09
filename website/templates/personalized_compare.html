@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Personalized Medicine Compare
+{% endblock %}
+
+{% block css %}
+    {% comment %} <link href="https://cdn.jsdelivr.net/npm/molstar@4.12.1/build/viewer/molstar.min.css" rel="stylesheet"> {% endcomment %}
+    <link href="{% static 'personalized_compare.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+<iframe src="https://www.rcsb.org/groups/3d-sequence/polymer_entity/{{ uniprot_accession }}" allow-scripts allow-popups allow-same-origin></iframe>
+
+
+
+{% endblock %}
+
+{% block js %}
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/molstar@4.12.1/build/viewer/molstar.min.js"></script> {% endcomment %}
+{% endblock %}

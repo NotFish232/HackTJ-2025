@@ -60,7 +60,6 @@ def personalized_compare(request, uniprot_accession):
         run_alphafold(uniprot_accession)
     return render(request, 'personalized_compare.html', {
         'uniprot_accession': uniprot_accession,
-        'sequence': Protein.objects.get(uniprot_accession=uniprot_accession).uniprot_sequence
     })
 
 
