@@ -12,7 +12,7 @@
 
 {% block body %}
 
-<div id="viewer" style="position: relative; width: 500px; height: 500px;"></div>
+<div id="viewer" style="position: relative" class="w-full h-full"></div>
 
 {% endblock %}
 
@@ -64,9 +64,7 @@
         let viewer = $('#viewer');
         viewer.css({
             position: 'absolute',
-            left: 0,
-            width: '100vw',
-            height: '92vh',
+            left: 0
         });
 
         function sleep(ms) {

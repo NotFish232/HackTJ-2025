@@ -26,9 +26,11 @@ module.exports = {
          */
         '../../**/templates/**/*.html',
 
-        
+
         // since we migrated apps
         '../../../../templates/**/*.html',
+
+        '../../../../static/**/*.js',
 
         /**
          * JS: If you use Tailwind CSS in JavaScript, uncomment the following lines and make sure
@@ -46,7 +48,16 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                "theme-light": "#8bb8e8",
+                "theme-medium": "#003092",
+                "theme-dark": "#0a2767",
+            },
+        },
+        fontFamily: {
+            roboto: ['Roboto', 'sans-serif'],
+        }
     },
     plugins: [
         /**

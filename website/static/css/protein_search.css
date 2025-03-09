@@ -1,0 +1,8 @@
+#search {
+    background-image: url('/static/img/protein.png'), url('/static/img/magnifying_glass.png'); /* Replace with your images */
+    background-position: 10px center, right 10px center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 30px, 25px;
+    padding-left: 50px; /* Space for the left icon */
+    padding-right: 35px; /* Space for the right icon */
+}
