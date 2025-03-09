@@ -29,7 +29,11 @@
         {% for protein in proteins %}
         <tr>
             <td>{{ protein.name }}</td>
-            <td>{{ protein.uniprot_id }}</td>
+            <td>
+                <a href="{% url 'protein_folding' protein.uniprot_accession %}">
+                    {{ protein.uniprot_accession }}
+                </a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>

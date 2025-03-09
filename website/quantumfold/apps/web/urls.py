@@ -27,4 +27,5 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("visualizer", views.visualizer, name="visualizer"),
     path("protein_search", views.protein_search, name="protein_search"),
+    path("protein_folding/<str:uniprot_accession>", views.protein_folding, name="protein_folding"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

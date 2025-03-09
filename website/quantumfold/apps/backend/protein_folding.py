@@ -12,7 +12,7 @@ UNIPROTKB_SEARCH_API_URL = "https://rest.uniprot.org/uniprotkb/search"
 
 ALPHAFOLD_API_PRED_URL = "https://alphafold.ebi.ac.uk/api/prediction"
 
-MEDIA_PATH = Path(__file__).parents[4] / "media"
+MEDIA_PATH = Path(__file__).parents[3] / "media"
 
 
 SCIENTIFIC_NAME_KEY = "organismScientificName"
