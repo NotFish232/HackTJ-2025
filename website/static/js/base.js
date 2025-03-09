@@ -14,5 +14,4 @@ $(function() {
     } else if (p === "/visualizer") {
         $("#btn_3").addClass(selected_class);
     }
-    console.log(window.location.pathname);
 });
