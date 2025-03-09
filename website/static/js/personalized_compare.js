@@ -3,7 +3,8 @@ const ALPHAMISSENSE_API_URL = "https://alphamissense.hegelab.org/hotspotapi";
 $(function() {
     $("#alphamissense-submit").click(function() {
         let residueNum = $("#alphamissense-input").val();
-        let uniprotId = window.location.href.split("/")[-1];
+        let parts = window.location.href.split("/");
+        let uniprotId = parts[parts.length - 1];
         let results = getAlphaMissenseResult(uniprotId, residueNum);
         if (results) {
             $("#alphamissense-benign").text(results.benign);
