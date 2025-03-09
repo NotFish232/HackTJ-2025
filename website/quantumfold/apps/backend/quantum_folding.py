@@ -51,7 +51,11 @@ def extract_amino_groups(
 
     i = 0
     while i < len(atom_data):
+        if len(atom_data[i]) == 11:
+            atom_data.insert(5, atom_data[4][1:])
+            atom_data[4] = atom_data[0]
         amino_acid = atom_data[i][3]
+        
         confidence = float(atom_data[i][10])
         id = atom_data[i][5]
 

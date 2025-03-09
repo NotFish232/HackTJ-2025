@@ -13,48 +13,46 @@ Protein Search
 <div class="flex items-center justify-center flex-col">
     <h1 class="mt-8 mb-4 text-4xl font-semibold">Search For a Protein</h1>
     <form class="w-full flex flex-col items-center" action="" method="get">
-
         <input class="w-[80%] border-0" type="text" name="search" id="search" class="form-control" placeholder="Protein"
             required autofocus value="{{ protein }}">
-
-
 
         <input type="submit" class="btn btn-lg btn-success btn-block" id="search-button" value="Search">
     </form>
     <br>
-    <h2 class="text-4xl">Results</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Protein</th>
-                <th>Uniprot ID</th>
-                <th>AlphaFold</th>
-                <th>QuantumFold</th>
-                <th>Personalized Medicine Compare</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for protein in proteins %}
-            <tr>
-                <td>{{ protein.name }}</td>
-                <td>
-                    {{ protein.uniprot_accession }}
-                </td>
-                <td>
-                    <a href="{% url 'visualize_folding' protein.uniprot_accession %}" target="_blank">
-                        AlphaFold
-                    </a>
-                </td>
-                <td>
-                    <a href="{% url 'protein_folding' protein.uniprot_accession %}" target="_blank">
-                        QuantumFold
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
 
-    </table>
+    <div>
+        {% if proteins %}
+        {% for protein in proteins|slice:":20" %}
+        <div class="flex flex-row">
+            <div>
+                Protein Name:
+            </div>
+            <div>{{ protein.name }}</div>
+            <div>
+                {{ protein.uniprot_accession }}
+            </div>
+            <div>
+                <a href="{% url 'visualize_folding' protein.uniprot_accession %}">
+                    Visualize
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'protein_folding' protein.uniprot_accession %}">
+                    Model Folding
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div>
+            <div>
+                Nothing here...
+                Enter a search query to get started!
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
 </div>
 
 {% endblock %}
