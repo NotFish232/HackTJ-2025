@@ -14,10 +14,15 @@
 
 <iframe src="https://www.rcsb.org/groups/3d-sequence/polymer_entity/{{ uniprot_accession }}" allow-scripts allow-popups allow-same-origin></iframe>
 
-
+<div id="alphamissense">
+    <input type="text" id="alphamissense-input" placeholder="AlphaFold Missense Variant">
+    <button id="alphamissense-button">Search</button>
+    <span id="alphamissense-results"></span>
+</div>
 
 {% endblock %}
 
 {% block js %}
     {% comment %} <script src="https://cdn.jsdelivr.net/npm/molstar@4.12.1/build/viewer/molstar.min.js"></script> {% endcomment %}
+    <script src="{% static 'personalized_compare.js' %}"></script>
 {% endblock %}

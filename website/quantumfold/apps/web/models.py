@@ -23,6 +23,7 @@ class Protein(models.Model):
     def __str__(self):
         return self.uniprot_accession
 
+
 class ProteinResult(models.Model):
     protein = models.ForeignKey(Protein, on_delete=models.CASCADE, null=True, blank=True)
 
@@ -31,4 +32,3 @@ class ProteinResult(models.Model):
 
     def __str__(self):
         return self.protein.uniprot_accession
-    
