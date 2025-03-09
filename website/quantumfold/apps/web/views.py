@@ -10,7 +10,7 @@ import datetime
 from quantumfold.apps.web.models import User
 
 from quantumfold.apps.backend.search import search_proteins
-from quantumfold.apps.backend.protein_folding import run_full_protein_folding
+from website.quantumfold.apps.backend.alphafold_folding import run_full_protein_folding
 
 import logging
 

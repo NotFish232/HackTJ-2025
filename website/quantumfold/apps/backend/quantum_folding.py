@@ -39,6 +39,8 @@ MIN_NUM_AMINO_ACIDS = 5
 MAX_NUM_AMINO_ACIDS = 7
 MIN_CONFIDENCE_THRESHOLD = 60
 
+INTERPOLATION_FACTOR = 0.3
+
 
 def extract_amino_groups(
     pdb_file: str,
@@ -180,9 +182,9 @@ def apply_updated_amino_acid_coordinates(
 ) -> list[str]:
     first_amino_idx = next(i for i, l in enumerate(pdb_content) if l.startswith("ATOM"))
 
-    # for i in range(first_amino_idx, first_amino_idx + sum(len(a[2]) for a in amino_groups)):
-    #     pdb_content[i] = pdb_content[i][:-19] + " 0.01" + pdb_content[i][-14:]
- 
+    for i in range(first_amino_idx, first_amino_idx + sum(len(a[2]) for a in amino_groups)):
+        pdb_content[i] = pdb_content[i][:-19] + " 0.01" + pdb_content[i][-14:]
+
     for idxs, new_coordinates in zip(idxs_list, new_coordinates_list):
         current_amino_chain_coordinates = [
             mean([a[1] for a in amino_groups[i][2]]) for i in idxs
@@ -199,6 +201,16 @@ def apply_updated_amino_acid_coordinates(
                 current_element_coordinates, new_amino_acid_coordinate
             )
 
+            for i in range(len(new_element_coordinates)):
+                a_x, a_y, a_z = new_element_coordinates[i]
+                b_x, b_y, b_z = current_element_coordinates[i]
+
+                new_element_coordinates[i] = (
+                    INTERPOLATION_FACTOR * a_x + (1 - INTERPOLATION_FACTOR) * b_x,
+                    INTERPOLATION_FACTOR * a_y + (1 - INTERPOLATION_FACTOR) * b_y,
+                    INTERPOLATION_FACTOR * a_z + (1 - INTERPOLATION_FACTOR) * b_z,
+                )
+
             amino_idx_offset = first_amino_idx + sum(
                 len(amino_groups[i][2]) for i in range(amino_idx)
             )
@@ -211,7 +223,7 @@ def apply_updated_amino_acid_coordinates(
                 new_element_coordinates,
             ):
                 l = pdb_content[i].split()
-     
+
                 l[6] = f"{coord[0]:.3f}"
                 l[7] = f"{coord[1]:.3f}"
                 l[8] = f"{coord[2]:.3f}"
@@ -249,9 +261,7 @@ def run_quantum_folding(pdb_file: str) -> str:
         pdb_content, amino_groups, low_confidence_chains, amino_acid_coordinates_list
     )
 
-    open("media/changed.pdb", "w").write("\n".join(pdb_content))
-
-    return ""
+    return "\n".join(pdb_content)
 
 
-print(run_quantum_folding("media/angiotensin_alphafold.pdb"))
+
