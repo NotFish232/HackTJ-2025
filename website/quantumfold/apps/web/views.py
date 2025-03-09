@@ -50,8 +50,18 @@ def visualize_folding(request, uniprot_accession):
     return redirect(reverse("visualizer") + f"?url={alphafold_result}")
 
 
-def personalized_compare(request):
-    return render(request, 'personalized_compare.html')
+def personalized_compare(request, uniprot_accession):
+    try:
+        protein = Protein.objects.get(uniprot_accession=uniprot_accession)
+        protein_result = ProteinResult.objects.get(protein=protein)
+        if not protein_result.alphafold_result:
+            run_alphafold(uniprot_accession)
+    except:
+        run_alphafold(uniprot_accession)
+    return render(request, 'personalized_compare.html', {
+        'uniprot_accession': uniprot_accession,
+        'sequence': Protein.objects.get(uniprot_accession=uniprot_accession).uniprot_sequence
+    })
 
 
 def protein_search(request):

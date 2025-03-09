@@ -29,5 +29,5 @@ urlpatterns = [
     path("protein_search", views.protein_search, name="protein_search"),
     path("visualize_folding/<str:uniprot_accession>", views.visualize_folding, name="visualize_folding"),
     path("protein_folding/<str:uniprot_accession>", views.protein_folding, name="protein_folding"),
-    path("personalized_compare", views.personalized_compare, name="personalized_compare"),
+    path("personalized_compare/<str:uniprot_accession>", views.personalized_compare, name="personalized_compare"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

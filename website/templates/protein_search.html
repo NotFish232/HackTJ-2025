@@ -46,6 +46,10 @@ Protein Search
                    class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-transform transform hover:scale-105">
                     QuantumFold
                 </a>
+                <a href="{% url 'personalized_compare' protein.uniprot_accession %}" target="_blank"
+                   class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition-transform transform hover:scale-105">
+                    Personalized Medicine Compare
+                </a>
             </div>
         </div>
         {% endfor %}
