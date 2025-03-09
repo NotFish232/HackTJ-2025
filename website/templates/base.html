@@ -54,8 +54,8 @@
               href="{% url 'admin:index' %}">Admin</a>
           </li>
           {% endif %}
-          <li>
-            <i class="fa-solid fa-user"></i>&nbsp; {{ request.user.person.full_name }}
+          <li style="color:rgb(0, 109, 65); font-weight: bold">
+            <i class="fa-solid fa-user"></i>&nbsp; {{ request.user.username }}
           </li>
           <li>
             <a class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"

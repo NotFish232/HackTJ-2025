@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, UserManager, Permission
 import datetime
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     USERNAME_FIELD = "username"
     username = models.CharField(max_length=512, unique=True)

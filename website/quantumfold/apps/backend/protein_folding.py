@@ -35,11 +35,11 @@ def alphafold_fetch(
 
     response_json = response.json()[0]
 
-    uniprot_accession = response_json[UNIPROT_ACCESSION_KEY]
-    entry_id = response_json[ENTRY_ID_KEY]
-    uniprot_id = response_json[UNIPROT_ID_KEY]
-    uniprot_description = response_json[UNIPROT_DESCRIPTION_KEY]
-    uniprot_sequence = response_json[UNIPROT_SEQUENCE_KEY]
+    uniprot_accession = response_json.get(UNIPROT_ACCESSION_KEY)
+    entry_id = response_json.get(ENTRY_ID_KEY)
+    uniprot_id = response_json.get(UNIPROT_ID_KEY)
+    uniprot_description = response_json.get(UNIPROT_DESCRIPTION_KEY)
+    uniprot_sequence = response_json.get(UNIPROT_SEQUENCE_KEY)
 
     pdb_file_url = response_json[PDBURL_KEY]
 
