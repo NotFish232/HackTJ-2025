@@ -41,13 +41,13 @@ def alphafold_fetch(
     if not pdb_file_url:
         return None
 
-    protein = Protein(
+    protein = Protein.objects.get_or_create(
         uniprot_accession=uniprot_accession,
         entry_id=entry_id,
         uniprot_id=uniprot_id,
         uniprot_description=uniprot_description,
         uniprot_sequence=uniprot_sequence,
-    )
+    )[0]
 
     return protein, response_json, pdb_file_url
 

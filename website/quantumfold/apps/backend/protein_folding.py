@@ -26,7 +26,7 @@ def run_alphafold(uniprot_accession: str) -> ProteinResult | None:
     # save protein json to file in case its needed
     json.dump(protein_json, open(str(protein_dir / "protein.json"), "w"), indent=4)
 
-    p = ProteinResult(protein=protein)
+    p = ProteinResult.objects.get_or_create(protein=protein)[0]
     p.alphafold_result.name = str(protein_dir / "alphafold.pdb")
 
     protein.save()

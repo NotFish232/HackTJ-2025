@@ -24,10 +24,11 @@ class Protein(models.Model):
         return self.uniprot_accession
 
 class ProteinResult(models.Model):
-    protein = models.ForeignKey(Protein, on_delete=models.CASCADE)
+    protein = models.ForeignKey(Protein, on_delete=models.CASCADE, null=True, blank=True)
 
     alphafold_result = models.FileField()
     quantum_result = models.FileField()
 
     def __str__(self):
         return self.protein.uniprot_accession
+    
