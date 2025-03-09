@@ -12,7 +12,10 @@
 
 {% block body %}
 
-<div id="viewer" style="position: relative" class="w-full h-full"></div>
+<div id="viewer" class="viewer"></div>
+<div id="viewer1" class="viewer"></div>
+<div id="viewer2" class="viewer"></div>
+
 
 {% endblock %}
 
@@ -22,16 +25,18 @@
         // Build an ad-hoc MVS view
         // Try and get URL from ?url=
         let url = new URLSearchParams(window.location.search).get('url');
+        let url1 = new URLSearchParams(window.location.search).get('url1');
+        let url2 = new URLSearchParams(window.location.search).get('url2');
         let format = new URLSearchParams(window.location.search).get('format');
         console.log(url, format)
-        if (!url) {
+        if (!url && !url1 && !url2) {
             url = 'https://www.ebi.ac.uk/pdbe/entry-files/1cbs.bcif';
             format = 'bcif';
         }
         if (!format) {
             format = 'pdb';
         }
-        console.log(url, format)
+
         const builder = molstar.PluginExtensions.mvs.MVSData.createBuilder();
         const structure = builder
             .download({ url: url })
@@ -42,31 +47,11 @@
             .representation({ type: 'cartoon' })
             .color({ color: 'green' });
 
-        // make the color depend on pLDDT Confidence
-        {% comment %} structure
-            .component({ selector: 'ligand' })
-            .label({ text: 'Retinoic acid' })
-            .focus({})
-            .representation({ type: 'ball_and_stick' })
-            .color({ color: '#cc3399' }); {% endcomment %}
         const mvsData = builder.getState();
-
-        // Initialize viewer and load MVSJ
         const mvsj = molstar.PluginExtensions.mvs.MVSData.toMVSJ(mvsData);
         molstar.Viewer.create('viewer', { layoutIsExpanded: false, layoutShowControls: false })
             .then(viewer => viewer.loadMvsData(mvsj, 'mvsj'));
-
-        // // Alternative initialization and loading (avoids encoding and again decoding the data, allows changing the view by using `replaceExisting: true`):
-        // molstar.Viewer.create('viewer2', { layoutIsExpanded: false, layoutShowControls: false })
-        //     .then(viewer => molstar.PluginExtensions.mvs.loadMVS(viewer.plugin, mvsData, { sourceUrl: undefined, sanityChecks: true, replaceExisting: false }));
     
-        
-        let viewer = $('#viewer');
-        viewer.css({
-            position: 'absolute',
-            left: 0
-        });
-
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
