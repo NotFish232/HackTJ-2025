@@ -34,7 +34,7 @@ def run_full_protein_folding(uniprot_accession: str) -> ProteinResult:
     p = ProteinResult(
         protein=protein
     )
-    p.alphafold_result = str(protein_dir / "alphafold.pdb")
-    p.quantum_result = str(protein_dir / "quantumfold.pdb")
+    p.alphafold_result.name = str(protein_dir / "alphafold.pdb")
+    p.quantum_result.name = str(protein_dir / "quantumfold.pdb")
 
     return p
