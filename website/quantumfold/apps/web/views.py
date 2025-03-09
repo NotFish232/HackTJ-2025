@@ -28,6 +28,11 @@ def visualizer(request):
 def protein_folding(request, uniprot_accession):
     run_full_protein_folding(uniprot_accession)
     alphafold_result = f"/media/{uniprot_accession}/alphafold.pdb"
+    quantumfold_result = f"/media/{uniprot_accession}/quantumfold.pdb"
+    return redirect(reverse("visualizer") + f"?url1={alphafold_result}&url2={quantumfold_result}")
+
+
+def visualize_folding(request):
     return redirect(reverse("visualizer") + f"?url={alphafold_result}")
 
 

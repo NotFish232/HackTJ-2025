@@ -28,6 +28,7 @@ Protein Search
             <tr>
                 <th>Protein</th>
                 <th>Uniprot ID</th>
+                <th>Visualize</th>
                 <th>Model Folding</th>
                 <th>Personalized Medicine Compare</th>
             </tr>
@@ -38,6 +39,11 @@ Protein Search
                 <td>{{ protein.name }}</td>
                 <td>
                     {{ protein.uniprot_accession }}
+                </td>
+                <td>
+                    <a href="{% url 'visualize_folding' protein.uniprot_accession %}">
+                        Visualize
+                    </a>
                 </td>
                 <td>
                     <a href="{% url 'protein_folding' protein.uniprot_accession %}">
