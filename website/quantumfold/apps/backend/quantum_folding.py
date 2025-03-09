@@ -36,6 +36,7 @@ AMINO_ACID_3_TO_1 = {
 
 MIN_NUM_AMINO_ACIDS = 5
 MAX_NUM_AMINO_ACIDS = 7
+MAX_NUM_SUBUNITS = 7
 MIN_CONFIDENCE_THRESHOLD = 60
 
 INTERPOLATION_FACTOR = 0.3
@@ -101,6 +102,9 @@ def extract_low_confidence_chains(
 
         if len(chain) >= MIN_NUM_AMINO_ACIDS:
             low_confidence_chains.append(chain)
+            if len(low_confidence_chains) == MAX_NUM_SUBUNITS:
+                break
+            
             i += len(chain)
         else:
             i += 1
