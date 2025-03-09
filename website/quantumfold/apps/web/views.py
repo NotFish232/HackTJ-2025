@@ -10,7 +10,7 @@ import datetime
 from quantumfold.apps.web.models import User
 
 from quantumfold.apps.backend.search import search_proteins
-from quantumfold.apps.backend.protein_folding import run_full_protein_folding
+from quantumfold.apps.backend.protein_folding import run_full_protein_folding, run_alphafold
 
 import logging
 
@@ -32,7 +32,9 @@ def protein_folding(request, uniprot_accession):
     return redirect(reverse("visualizer") + f"?url1={alphafold_result}&url2={quantumfold_result}")
 
 
-def visualize_folding(request):
+def visualize_folding(request, uniprot_accession):
+    run_alphafold(request.GET.get("uniprot_accession"))
+    alphafold_result = f"/media/{uniprot_accession}/alphafold.pdb"
     return redirect(reverse("visualizer") + f"?url={alphafold_result}")
 
 
