@@ -14,7 +14,7 @@ $(function() {
 });
 
 async function getAlphaMissenseResult(uniprotId, residueNum) {
-    const url = `${ALPHAMISSENSE_API_URL}?uid=${uniprotId}&resi=${residueNum}`;
+    const url = `/alphamissense/${uniprotId}/${residueNum}`;
     try {
         const response = await axios.get(url, { timeout: 10000 });
         if (response.status !== 200) {
